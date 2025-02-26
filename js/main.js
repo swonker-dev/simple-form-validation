@@ -1,8 +1,11 @@
 class FormValidation{
     selectors ={
         form: '[data-id="form"]',
-        errMessage: '[data-id="fieldErrorMessage"]'
+        errMessage: '[data-id="fieldErrorMessage"]',
+        password: 'password',
+        repeatPassword:  'password-repeat'
     }
+    #password = null;
     constructor(){
         this.bindEvents();
     }
@@ -11,12 +14,26 @@ class FormValidation{
         patternMismatch: (target)=>`${target.title}`,
         tooLong: (target)=>`Макисмальное количество символов - ${target.maxLength}`,
         tooShort: (target)=>`Минимальное количество символов - ${target.minLength}`,
-        valueMissing: ()=>`Это поле не может быть пустым`
+        valueMissing: ()=>`Это поле не может быть пустым`,
+        differentPasswords: ()=>`Пароль отличается`,
     }
 
     showErrMessage(target,messages){
         const fieldErrorMessageElement = target.parentNode.querySelector(this.selectors.errMessage);
         fieldErrorMessageElement.innerHTML = `${messages.map((e)=>`<span>${e}</span>`).join('')}`;
+    }
+    checkForPassword(target){
+        if(target.name === this.selectors.password){
+            this.#password = target.value;
+        }
+        if(target.name === this.selectors.repeatPassword){
+            if(target.value === this.#password){
+                return
+            }
+            else{
+                this.showErrMessage(target,[this.validityState.differentPasswords()]);
+            }
+        }
     }
     validateFormElement(target){
         const {validity} = target;
@@ -30,6 +47,9 @@ class FormValidation{
         const isValid = errMessages.length === 0;
         this.showErrMessage(target,errMessages);
         target.ariaInvalid = !isValid;
+        if(isValid){
+            this.checkForPassword(target);
+        }
         return isValid;
     }
     onBlur(event){
