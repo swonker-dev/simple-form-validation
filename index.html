@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validity</title>
+    <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <form action="" id="regForm" class="form-register" novalidate data-id="form">
+        <p class="field">
+            <label for="login" class="field__label">Введите логин</label>
+            <input name="login" id="login" class="field__input" required minlength="3" maxlength="12" aria-errormessage="login-errors">
+            <span class="field__errors" id="login-errors" data-id="fieldErrorMessage"></span>
+        </p>
+        <p class="field">
+            <label for="password" class="field__label">Введите пароль</label>
+            <input name="password" id="password" class="field__input" type="password" required minlength="8" maxlength="16" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" title="Пароль должен быть длиной от 8 до 16 символов и содержать как минимум одну цифру, одну букву в нижнем и одну букву в верхнем регистре" aria-errormessage="password-errors">
+            <span class="field__errors" id="password-errors" data-id="fieldErrorMessage"></span>
+        </p>
+        <p class="field">
+            <label for="password-repeat" class="field__label">Введите пароль повторно</label>
+            <input name="password-repeat" id="password-repeat" class="field__input" type="password" required minlength="8" maxlength="16" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" title="Пароль должен быть длиной от 8 до 16 символов и содержать как минимум одну цифру, одну букву в нижнем и одну букву в верхнем регистре" aria-errormessage="password-repeat-errors">
+            <span class="field__errors" id="password-repeat-errors" data-id="fieldErrorMessage"></span>
+        </p>
+        <p class="field">
+            <label for="about" class="field__label">О себе</label>
+            <textarea name="about" id="about" class="field__input"></textarea>
+        </p>
+        <fieldset class="radios">
+            <legend class="radios__legend">Выберите ваш пол</legend>
+            <input class="radios__control" type="radio" name="gender" id="male" value="Мужской" required aria-errormessage="gender-errors">
+            <label class="radios__label" for="male">Мужской</label>
+            <input class="radios__control" type="radio" name="gender" id="female" value="Женский" required aria-errormessage="gender-errors">
+            <label class="radios__label" for="female">Женский</label>
+            <span class="field__errors" id="gender-errors" data-id="fieldErrorMessage"></span>
+        </fieldset>
+        <p class="field field--last">
+            <input class="checkbox__control" type="checkbox" name="accept" id="accept" required aria-errormessage="checkbox-errors">
+            <label class="checkbox__label" for="accept">Вы согласны на всё?</label>
+            <span class="field__errors" id="checkbox-errors" data-id="fieldErrorMessage"></span>
+        </p>
+        <div class="form-register__container"><button class="form-register__button" type="submit">Регистрация</button></div>
+    </form>
+    <script src="js/main.js"></script>
+</body>
+</html>
