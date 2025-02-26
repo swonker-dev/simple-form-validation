@@ -4,4 +4,4 @@
 
 <h2>🛠️ Installation Steps:</h2>
 
-<p>1. coming soon</p>
+<p>. coming soon</p>
